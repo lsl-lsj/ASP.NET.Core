@@ -1,0 +1,49 @@
+@using _08ModelToView.Models
+@model List<Student>
+
+<html>
+    <body>
+        <style type="text/css">
+        table{
+            border-style: solid;
+            border-color: blue;
+            border-spacing: 20px 5px;
+            text-align: left;
+            margin: auto;
+        }
+        </style>
+        @{
+            if(Model != null && Model.Count > 0)
+            {
+                <table>
+                    <caption>学员列表</caption>
+                        <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>姓名</th>
+                                <th>年龄</th>
+                                <th>学习课程</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach(var s in Model)
+                                {
+                                    <tr>
+                                        <td>@s.ID</td>
+                                        <td>@s.Name</td>
+                                        <td>@s.Age</td>
+                                        <td>@s.Course</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                </table>    
+            }
+            else
+            {
+                <div>无学员信息</div>
+            }
+        }
+    </body>
+</html>

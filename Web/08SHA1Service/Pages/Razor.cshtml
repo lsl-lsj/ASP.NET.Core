@@ -1,0 +1,28 @@
+@page
+@namespace _08SHA1Service
+@model TestModel
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+
+<html>
+    <body>
+        <form method="post">
+            请输入文本:<br/>
+            <input type="text" asp-for="@Model.InputText"/>
+            <input type="submit" value="提交" asp-page-handler="Upload"/>
+        </form>
+        <div>
+            @{
+                if(!string.IsNullOrWhiteSpace(Model.HashedText)){
+                    <p>
+                        <fieldset>
+                            <legend>处理结果</legend>
+                            <span>
+                                @Model.HashedText
+                            </span>
+                        </fieldset>
+                    </p>
+                }
+            }
+        </div>
+    </body>
+</html>

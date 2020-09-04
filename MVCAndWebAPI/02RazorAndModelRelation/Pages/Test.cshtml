@@ -1,0 +1,30 @@
+@page
+@using _02RazorAndModelRelation.Model
+@model TestModel
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>测试页面</title>
+    </head>
+    <body>
+        <form method="Post">
+            产品编号：<input readonly asp-for="ProductID"/><br/>
+            产品名称：<input asp-for="@Model.ProductName"/><br/>
+            生产日期：<input asp-for="@Model.ProductDate"/><br/>
+            产品分类：<input asp-for="@Model.ProductFamily"/><br/>
+            <br/><br/>
+            <input type="submit" value="提交"/>
+        </form>
+        <div>
+            @{
+                if(ViewData.ContainsKey("msg"))
+                {
+                    <p>@ViewData["msg"].ToString()</p>
+                }
+            }
+        </div>
+    </body>
+</html>
