@@ -1,10 +1,12 @@
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.FileProviders;
 
-namespace _08ModelToView
+namespace _12OpenDirectoryBrowsing
 {
     public class Startup
     {
@@ -12,10 +14,7 @@ namespace _08ModelToView
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(option =>
-            {
-                option.EnableEndpointRouting = false;
-            });
+            services.AddDirectoryBrowser();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -26,12 +25,18 @@ namespace _08ModelToView
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseRouting();
-
-            app.UseMvc(r =>
+            app.UseStaticFiles(new StaticFileOptions
             {
-                r.MapRoute("app", "{controller=Student}/{action=AllStudents}");
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.WebRootPath, "images")),
+                RequestPath = "/gifs"
             });
+
+            app.UseDirectoryBrowser(new DirectoryBrowserOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.WebRootPath, "images"))
+            });
+
+            app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {

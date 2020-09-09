@@ -1,0 +1,36 @@
+@page "/"
+<html>
+
+<head>
+    <title>
+        JQuery
+    </title>
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <style>
+        #rect {
+            border: 1px solid red;
+            padding-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <button id="right">向右移动</button>
+        <button id="reset">重置</button>
+    </div>
+    <div>
+        <div id="rect"></div>
+    </div>
+        <script type="text/javascript">
+            $("#right").click(() => {
+                $("#rect").css("padding", "300px")
+            });
+
+            $("#reset").click(() => {
+                $("#rect").css("padding", "10px");
+            });
+        </script>
+</body>
+
+</html>

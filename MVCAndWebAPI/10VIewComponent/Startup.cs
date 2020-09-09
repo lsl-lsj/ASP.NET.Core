@@ -1,10 +1,14 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace _08ModelToView
+namespace _10VIewComponent
 {
     public class Startup
     {
@@ -12,10 +16,7 @@ namespace _08ModelToView
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(option =>
-            {
-                option.EnableEndpointRouting = false;
-            });
+            services.AddMvc(option => option.EnableEndpointRouting = false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -28,18 +29,7 @@ namespace _08ModelToView
 
             app.UseRouting();
 
-            app.UseMvc(r =>
-            {
-                r.MapRoute("app", "{controller=Student}/{action=AllStudents}");
-            });
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
-            });
+            app.UseMvc(r => r.MapRoute("app", "{controller=demo}/{action=start}"));
         }
     }
 }
